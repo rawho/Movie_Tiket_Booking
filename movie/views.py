@@ -70,16 +70,23 @@ def Book_Ticket(request,pid):
     error = False
     book=""
     if request.method=="POST":
-        t = request.POST['name']
         n = request.POST['num']
         s = request.POST['seat']
         p = int(n)*120
-        cust = Customer.objects.get(user=request.user)
-        book = Booking.objects.create(user1=cust,user=t,set_time=data,ticket=n,price=p,seat=s)
+        book = Booking.objects.create(set_time=data,ticket=n,price=p,seat=s)
         error=True
     d = {'data':data,'error':error,'li':li,'book':book}
-    return render(request,'book_ticket.html',d)
 
+    if pid == 1:
+        return render(request,'book_ticket1.html',d)
+    elif pid == 2:
+        return render(request, 'book_ticket2.html', d)
+    elif pid == 3:
+        return render(request, 'book_ticket3.html', d)
+    elif pid == 4:
+        return render(request, 'book_ticket4.html', d)
+    elif pid == 5:
+        return render(request, 'book_ticket5.html', d)
 
 def View_Booking(request):
     user = User.objects.get(id=request.user.id)

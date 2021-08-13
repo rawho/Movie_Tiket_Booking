@@ -30,19 +30,29 @@
     <h1>Movie Seat Selection</h1>
     <div style="width: 50%; margin: auto; display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 50px;" class="row">
         <div class="col-md-2">
-            <button type="button" class="btn btn-light">Screen 1</button>
+            <a href={% url 'book_ticket' 1 %}>
+                <button type="button" class="btn btn-light">Screen 1</button>
+            </a>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-light">Screen 2</button>
+            <a href={% url 'book_ticket' 2 %}>
+                <button type="button" class="btn btn-light">Screen 2</button>
+            </a>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-light">Screen 3</button>
+            <a href={% url 'book_ticket' 3 %}>
+                <button type="button" class="btn btn-light">Screen 3</button>
+            </a>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-light">Screen 4</button>
+            <a href={% url 'book_ticket' 4 %}>
+                <button type="button" class="btn btn-light">Screen 4</button>
+            </a>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-light">Screen 5</button>
+            <a href={% url 'book_ticket' 5 %}>
+                <button type="button" class="btn btn-light">Screen 5</button>
+            </a>
         </div>
 
     </div>
@@ -61,6 +71,7 @@
                     </div>
                 </div>
                 <button onclick="takeData()">Start Selecting</button>
+                <button onclick="makeSeatsPending()">Make Seats Pending</button>
             </div>
             <!-- //input fields -->
             <!-- seat availabilty list -->
@@ -70,6 +81,8 @@
                 <li class="smallBox redBox">Reserved Seat</li>
 
                 <li class="smallBox emptyBox">Empty Seat</li>
+
+                <li class="smallBox greyBox">Pending Seat</li>
             </ul>
             <!-- seat availabilty list -->
             <!-- seat layout -->
@@ -988,6 +1001,7 @@
                     <h2 class="wthree">Screen this way</h2>
                 </div>
                 <button onclick="updateTextArea()">Confirm Selection</button>
+                <button onclick="updatePending()">Confirm Pending</button>
             </div>
             <!-- //seat layout -->
             <!-- details after booking displayed here -->
@@ -1042,6 +1056,16 @@
             }
         }
 
+        function makeSeatsPending(){
+            if (($("#Numseats").val().length == 0)) {
+                alert("Please Enter your Name and Number of Seats");
+            } else {
+                $(".inputForm *").prop("disabled", true);
+                $(".seatStructure *").prop("disabled", false);
+                document.getElementById("notification").innerHTML =
+                    "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Please Select your Seats NOW!</b>";
+            }
+        }
 
         function updateTextArea() {
 
@@ -1068,6 +1092,29 @@
             }
         }
 
+        function updatePending() {
+            if ($("input:checked").length == ($("#Numseats").val())) {
+                $(".seatStructure *").prop("disabled", true);
+
+            
+                var allNumberVals = [];
+                var allSeatsVals = [];
+
+                //Storing in Array
+                
+                allNumberVals.push($("#Numseats").val());
+                $('#seatsBlock :checked').each(function () {
+                    allSeatsVals.push($(this).val());
+                });
+
+                //Displaying 
+               
+                $('#NumberDisplay').val(allNumberVals);
+                $('#seatsDisplay').val(allSeatsVals);
+            } else {
+                alert("Please select " + ($("#Numseats").val()) + " seats")
+            }
+        }
 
         function myFunction() {
             alert($("input:checked").length);
@@ -1102,8 +1149,7 @@
     </script>
     {% if error %}
 <script>
-    alert('seats are selected..');
-    window.location =  "{% url 'payment' book.id %}";
+    window.location = '/book_ticket1'
 </script>
 {% endif %}
 </body>
