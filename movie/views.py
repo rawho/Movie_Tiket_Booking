@@ -64,18 +64,39 @@ def Movie_detail(request,pid):
 def Book_Ticket(request,pid):
     data = Set_Timing.objects.get(id=pid)
     data1 = Booking.objects.filter(set_time=data)
+    data2 = Pending.objects.filter(set_time=data)
+
     li = ""
     for i in data1:
         li+=","+i.seat
+    
+    li2 = ""
+    for i in data2:
+        li2+=","+i.seat
+    print(li2)
     error = False
+    
     book=""
+    pend=""
     if request.method=="POST":
-        n = request.POST['num']
-        s = request.POST['seat']
-        p = int(n)*120
-        book = Booking.objects.create(set_time=data,ticket=n,price=p,seat=s)
+        try:
+            n = request.POST['num']
+            s = request.POST['seat']
+            p = int(n)*120
+            book = Booking.objects.create(set_time=data,ticket=n,price=p,seat=s)
+        except:
+            pass
+        try:
+            n_pending = request.POST['num_pending']
+            s_pending = request.POST['seat_pending']
+            p_pending = int(n_pending)*120
+            pend = Pending.objects.create(set_time=data,ticket=n_pending,price=p_pending,seat=s_pending)
+        
+        except:
+            pass
+
         error=True
-    d = {'data':data,'error':error,'li':li,'book':book}
+    d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend}
 
     if pid == 1:
         return render(request,'book_ticket1.html',d)
