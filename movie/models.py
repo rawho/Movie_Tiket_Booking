@@ -22,7 +22,7 @@ class Set_Timing(models.Model):
     time1 = models.CharField(max_length=100,null=True)
 
     def __str__(self):
-        return self.movie.name+" "+self.date11+" "+self.time1
+        return self.movie.name+" "+self.date1+" "+self.time1
 
 class Booking(models.Model):
     set_time = models.ForeignKey(Set_Timing, on_delete=models.CASCADE, null=True)
@@ -33,4 +33,15 @@ class Booking(models.Model):
     ticket = models.CharField(max_length=100,null=True)
 
     def __str__(self):
-        return self.set_time.movie.name+" "+self.user
+        return self.set_time.movie.name+" "
+
+class Pending(models.Model):
+    set_time = models.ForeignKey(Set_Timing, on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=100, null=True)
+    time = models.DateTimeField(null=True)
+    seat = models.CharField(max_length=100,null=True)
+    price = models.CharField(max_length=100,null=True)
+    ticket = models.CharField(max_length=100,null=True)
+
+    def __str__(self):
+        return self.set_time.movie.name+" "
