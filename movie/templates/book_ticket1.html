@@ -61,6 +61,25 @@
         <div class="w3ls-reg">
             <!-- input fields -->
             <div class="inputForm">
+                <label for="cars">Movie :</label>
+
+                <select name="cars" id="cars">
+                    {% for i in movies.values %}
+                    {% for j in i %}
+                    <option value="volvo">{{ j }}</option>
+                    {% endfor %}
+                {% endfor %}
+                
+                
+                </select>
+                <!-- {% for i in movies.values %}
+                    {% for j in i %}
+                        <h1>{{j}}</h1>
+                    {% endfor %}
+                {% endfor %} -->
+                <!-- {% for m in movie %}
+                    <h1>{{ m.name }}</h1>
+                {% endfor %} -->
                 <h2>fill the required details below and select your seats</h2>
                 <div class="mr_agilemain">
                     <div class="agileits-right">
