@@ -78,6 +78,7 @@ def Book_Ticket(request,pid):
     
     book=""
     pend=""
+    movie_time = Movie_Time.objects.all()
     if request.method=="POST":
         try:
             n = request.POST['num']
@@ -103,9 +104,13 @@ def Book_Ticket(request,pid):
         movies["name"] = Movie.objects.filter(screen=1)
         print(movies)
            
-        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies}
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
          
         return render(request,'book_ticket1.html',d)
+
+
+    if pid == 1:
+        return render(request,'book_ticket1.html', d)
     elif pid == 2:
         return render(request, 'book_ticket2.html', d)
     elif pid == 3:
