@@ -96,13 +96,21 @@ def Book_Ticket(request,pid):
             pass
 
         error=True
-    d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend}
+    # d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend}
 
     if pid == 1:
+        movies = {}
+        movies["name"] = Movie.objects.filter(screen=1)
+        print(movies)
+           
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies}
+         
         return render(request,'book_ticket1.html',d)
     elif pid == 2:
         return render(request, 'book_ticket2.html', d)
     elif pid == 3:
+        movie = Movie.objects.filter(screen=3)
+        print(movie)
         return render(request, 'book_ticket3.html', d)
     elif pid == 4:
         return render(request, 'book_ticket4.html', d)
