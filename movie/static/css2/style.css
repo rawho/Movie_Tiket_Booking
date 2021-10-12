@@ -128,7 +128,9 @@ q:after {
     content: '';
     content: none;
 }
-
+button{
+    margin-top: 30px;
+}
 table {
     display: table;
     border-collapse: separate;
@@ -227,6 +229,12 @@ img {
     max-width: 100%;
 }
 
+
+select{
+    padding: 5px;
+    outline: none;
+    border-radius: 5px;
+}
 /*--end reset--*/
 
 button.w3l-cart {
@@ -250,13 +258,7 @@ body a:hover {
 /* content */
 
 body {
-    background: url(../images/banner.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-    background-attachment: fixed;
+    background-color: #000;
     font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -265,30 +267,16 @@ body {
 }
 
 .w3ls-reg {
-    width: 700px;
-    margin: 0 5vw;
-    background: rgba(128, 128, 128, 0.34);
-    padding: 3.5vw;
-    box-sizing: border-box;
+    width: 40%;
     display: flex;
-    display: -webkit-flex;
-    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .container {
-    display: -webkit-flex;
-    display: -webkit-box;
-    display: -moz-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
     align-items: center;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 h1 {
@@ -314,8 +302,6 @@ h2 {
 
 .mr_agilemain {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
 }
 
 .agileits-left {
@@ -330,10 +316,7 @@ li.smallBox {
     color: #fff;
 }
 
-.agileits-right {
-    flex-basis: 40%;
-    margin-bottom: 1.5em;
-}
+
 
 .tw {
     width: 50%;
@@ -377,16 +360,16 @@ ul.seat_w3ls {
 .screen {
     width: 100%;
     background: #ff9800;
-    margin: 2em 0;
+    margin: 1em 0;
 }
 
 h2.wthree {
-    padding: 0.8em;
+    padding: 0.2em;
     font-size: 1.2em;
     color: #000;
     text-transform: uppercase;
     font-weight: 600;
-    letter-spacing: 7px;
+    letter-spacing: 4px;
     word-spacing: 10px;
 }
 
@@ -412,7 +395,11 @@ h2.wthree {
     content: "";
     background: yellow;
 }
-
+.inputForm{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
 
 .emptyBox::before {
     content: "";

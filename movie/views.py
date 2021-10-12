@@ -107,19 +107,33 @@ def Book_Ticket(request,pid):
         d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
          
         return render(request,'book_ticket1.html',d)
-
-
-    if pid == 1:
-        return render(request,'book_ticket1.html', d)
     elif pid == 2:
+        movies = {}
+        movies["name"] = Movie.objects.filter(screen=2)
+        print(movies)
+           
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
         return render(request, 'book_ticket2.html', d)
     elif pid == 3:
-        movie = Movie.objects.filter(screen=3)
-        print(movie)
+        movies = {}
+        movies["name"] = Movie.objects.filter(screen=3)
+        print(movies)
+           
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
         return render(request, 'book_ticket3.html', d)
     elif pid == 4:
+        movies = {}
+        movies["name"] = Movie.objects.filter(screen=4)
+        print(movies)
+           
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
         return render(request, 'book_ticket4.html', d)
     elif pid == 5:
+        movies = {}
+        movies["name"] = Movie.objects.filter(screen=5)
+        print(movies)
+           
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
         return render(request, 'book_ticket5.html', d)
 
 def View_Booking(request):
