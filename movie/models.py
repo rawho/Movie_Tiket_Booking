@@ -63,3 +63,21 @@ class Pending(models.Model):
 
     def __str__(self):
         return self.set_time.movie.name+" "
+
+
+class Screen1(models.Model):
+    gold = models.IntegerField()
+
+class Screen2(models.Model):
+    gold = models.IntegerField()
+    platinum = models.IntegerField()
+
+class Screen3(models.Model):
+    gold = models.IntegerField()
+    platinum = models.IntegerField()
+
+class Screen4(models.Model):
+    gold = models.IntegerField()
+
+class Screen5(models.Model):
+    gold = models.IntegerField()
