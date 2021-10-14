@@ -59,37 +59,18 @@
                 <p id="notification"></p>
                 <tr>
                     <td></td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td></td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    {% for i in A %}
-                    <td>
-                        {% if i in li %}
-                        <span class="smallBox redBox" value={{i}}></span>
-                        {% elif i in li2 %}
-                        <span class="smallBox greyBox" value={{i}}></span>
-                        {% else %}
-                        <input type="checkbox" class="seats" value={{i}}>
-                        {% endif %}
-                    </td>
+                    {% for i in row %}
+                    <td>{{i}}</td>
+                     {% ifequal i 5 %}
+                      <td></td>
+                     {% endifequal %} 
                     {% endfor %}
-                    <td class="seatGap"></td>
-                   
                 </tr>
-
+            
+                {% for j,v in seats.items %}
                 <tr>
-                    <td>B</td>
-                    {% for i in B %}
+                    <td>{{j}}</td>
+                    {% for i in v %}
                     <td>
                         {% if i in li %}
                         <span class="smallBox redBox" value={{i}}></span>
@@ -99,178 +80,19 @@
                         <input type="checkbox" class="seats" value={{i}}>
                         {% endif %}
                     </td>
-                        {% ifequal i "B5" %}
+                        {% ifequal i v.4 %}
                          <td></td>
                         {% endifequal %}
                     {% endfor %}
                     
                 </tr>
-
-                <tr>
-                    <td>C</td>
-                    {% for i in C %}
-                    <td>
-                        {% if i in li %}
-                        <span class="smallBox redBox" value={{i}}></span>
-                        {% elif i in li2 %}
-                        <span class="smallBox greyBox" value={{i}}></span>
-                        {% else %}
-                        <input type="checkbox" class="seats" value={{i}}>
-                        {% endif %}
-                    </td>
-                        {% ifequal i "C5" %}
-                         <td></td>
+                   {% ifequal j "E" %}
+                         <tr>
+                            <td></td>
+                        </tr>
                         {% endifequal %}
-                    {% endfor %}
-                   
-                </tr>
-
-                <tr>
-                    <td>D</td>
-                    {% for i in D %}
-                    <td>
-                        {% if i in li %}
-                        <span class="smallBox redBox" value={{i}}></span>
-                        {% elif i in li2 %}
-                        <span class="smallBox greyBox" value={{i}}></span>
-                        {% else %}
-                        <input type="checkbox" class="seats" value={{i}}>
-                        {% endif %}
-                    </td>
-                        {% ifequal i "D5" %}
-                         <td></td>
-                        {% endifequal %}
-                    {% endfor %}
-                   
-                </tr>
-
-                    <tr>
-                        <td>E</td>
-                        {% for i in E %}
-                        <td>
-                            {% if i in li %}
-                            <span class="smallBox redBox" value={{i}}></span>
-                            {% elif i in li2 %}
-                            <span class="smallBox greyBox" value={{i}}></span>
-                            {% else %}
-                            <input type="checkbox" class="seats" value={{i}}>
-                            {% endif %}
-                        </td>
-                            {% ifequal i "E5" %}
-                             <td></td>
-                            {% endifequal %}
-                        {% endfor %}
-                </tr>
-                <tr class="seatVGap"></tr>
-
-                <tr>
-                        <td>F</td>
-                          {% for i in F %}
-                    <td>
-                        {% if i in li %}
-                        <span class="smallBox redBox" value={{i}}></span>
-                        {% elif i in li2 %}
-                        <span class="smallBox greyBox" value={{i}}></span>
-                        {% else %}
-                        <input type="checkbox" class="seats" value={{i}}>
-                        {% endif %}
-                    </td>
-                        {% ifequal i "F5" %}
-                         <td></td>
-                        {% endifequal %}
-                    {% endfor %}
-                   
-                </tr>
-                <tr>
-                        <td>G</td>
-                        {% for i in G %}
-                        <td>
-                            {% if i in li %}
-                            <span class="smallBox redBox" value={{i}}></span>
-                            {% elif i in li2 %}
-                            <span class="smallBox greyBox" value={{i}}></span>
-                            {% else %}
-                            <input type="checkbox" class="seats" value={{i}}>
-                            {% endif %}
-                        </td>
-                            {% ifequal i "G5" %}
-                             <td></td>
-                            {% endifequal %}
-                        {% endfor %}
-                    
-                </tr>
-
-              <tr>
-                        <td>H</td>
-                        {% for i in H %}
-                        <td>
-                            {% if i in li %}
-                            <span class="smallBox redBox" value={{i}}></span>
-                            {% elif i in li2 %}
-                            <span class="smallBox greyBox" value={{i}}></span>
-                            {% else %}
-                            <input type="checkbox" class="seats" value={{i}}>
-                            {% endif %}
-                        </td>
-                            {% ifequal i "H5" %}
-                             <td></td>
-                            {% endifequal %}
-                        {% endfor %}
-                </tr>
-
-               <tr>
-                        <td>I</td>
-                        {% for i in I %}
-                        <td>
-                            {% if i in li %}
-                            <span class="smallBox redBox" value={{i}}></span>
-                            {% elif i in li2 %}
-                            <span class="smallBox greyBox" value={{i}}></span>
-                            {% else %}
-                            <input type="checkbox" class="seats" value={{i}}>
-                            {% endif %}
-                        </td>
-                            {% ifequal i "I5" %}
-                             <td></td>
-                            {% endifequal %}
-                        {% endfor %}
-                </tr>
-
-               <tr>
-                        <td>J</td>
-                        {% for i in J %}
-                        <td>
-                            {% if i in li %}
-                            <span class="smallBox redBox" value={{i}}></span>
-                            {% elif i in li2 %}
-                            <span class="smallBox greyBox" value={{i}}></span>
-                            {% else %}
-                            <input type="checkbox" class="seats" value={{i}}>
-                            {% endif %}
-                        </td>
-                            {% ifequal i "J5" %}
-                             <td></td>
-                            {% endifequal %}
-                        {% endfor %}
-                </tr>
-
-                <tr>
-                    <td>K</td>
-                    {% for i in K %}
-                    <td>
-                        {% if i in li %}
-                        <span class="smallBox redBox" value={{i}}></span>
-                        {% elif i in li2 %}
-                        <span class="smallBox greyBox" value={{i}}></span>
-                        {% else %}
-                        <input type="checkbox" class="seats" value={{i}}>
-                        {% endif %}
-                    </td>
-                        {% ifequal i "K5" %}
-                         <td></td>
-                        {% endifequal %}
-                    {% endfor %}
-            </tr>
+                {% endfor %}
+                
 
             </table>
 

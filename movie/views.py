@@ -115,6 +115,8 @@ def Book_Ticket(request,pid):
         I=['I1','I2','I3','I4','I5','I6','I7','I8','I9']
         J=['J1','J2','J3','J4','J5','J6','J7','J8']
         K=['K1','K2','K3','K4','K5','K6','K7','K8']
+        row=[1,2,3,4,5,6,7,8,9]
+        seats={'A':A,'B':B,'C':C,'D':D,'E':E,'F':F,'G':G,'H':H,'I':I,'J':J,'K':K}
         d = {
             'data':data,
             'error':error,
@@ -124,7 +126,8 @@ def Book_Ticket(request,pid):
             'movies':movies,
             'movie_time':movie_time,
             'screens':screens,
-            'A':A,'B':B,'C':C,'D':D,'E':E,'F':F,'G':G,'H':H,'I':I,'J':J,'K':K
+            'seats':seats,
+            'row':row
             }
          
         return render(request,'book_ticket1.html',d)
