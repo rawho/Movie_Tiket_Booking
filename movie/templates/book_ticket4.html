@@ -956,6 +956,16 @@
 
             <button onclick="updateTextArea()">Confirm Selection</button>
             <button onclick="updatePending()">Confirm Pending</button>
+            <span class="removePending" style="background: #f5f5f5;
+                border: none;
+                color: #000;
+                font-weight: 600;
+                padding: 8px 20px;
+                border-radius: 10px;
+                font-size: 1em;
+                letter-spacing: 1px;
+                font-family: 'Source Sans Pro', sans-serif;
+                cursor: pointer;">Remove Pending</span>
         </div>
         <!-- //seat layout -->
 
@@ -1031,6 +1041,15 @@
                         </td>
                         <td>
                             <textarea id="seatsDisplay_pending" name="seat_pending" readonly></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>
+                            <textarea id="NumberDisplay_unpending" name="num_unpending" readonly></textarea>
+                        </td>
+                        <td>
+                            <textarea id="seatsDisplay_unpending" name="seat_unpending" readonly></textarea>
                         </td>
                     </tr>
 
@@ -1171,10 +1190,29 @@
                 $(":checkbox").prop('disabled', false);
             }
         });
+        $('.removePending').click(function () {
+            var i=0;
+            var unclickedSeats = [];
+            $(".greyBox").click(function () {
+                unclickedSeats.push($(this).attr('value'));
+                i++;
+            var input = $('<input />', {
+            'type': 'checkbox',
+                'class': 'seats' });
+        $(this).parent().append(input);
+        $(this).remove();
+        input.focus();
+        $(':checkbox').prop('disabled', true);
+
+        $('#NumberDisplay_unpending').val(i);
+                $('#seatsDisplay_unpending').val(unclickedSeats);
+            }
+        );
+        })
     </script>
     {% if error %}
 <script>
-    window.location = '/book_ticket1'
+    window.location = '/book_ticket4'
 </script>
 {% endif %}
 </body>

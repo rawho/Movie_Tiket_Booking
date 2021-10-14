@@ -66,13 +66,13 @@ def Book_Ticket(request,pid):
     data1 = Booking.objects.filter(set_time=data)
     data2 = Pending.objects.filter(set_time=data)
 
-    li = ""
+    li = []
     for i in data1:
-        li+=","+i.seat
+        li.append(i.seat)
     
-    li2 = ""
+    li2 = []
     for i in data2:
-        li2+=","+i.seat
+        li2.append(i.seat)
     print(li2)
     error = False
     
@@ -90,11 +90,24 @@ def Book_Ticket(request,pid):
         try:
             n_pending = request.POST['num_pending']
             s_pending = request.POST['seat_pending']
+            
             p_pending = int(n_pending)*120
-            pend = Pending.objects.create(set_time=data,ticket=n_pending,price=p_pending,seat=s_pending)
-        
+            pend_seat = s_pending.split(',')
+            print(pend_seat)
+          
+            for i in pend_seat:
+                print(i)
+                print('pending')
+                pend = Pending.objects.create(set_time=data,ticket=n_pending,price=p_pending,seat=i)
+                print(pend)
         except:
-            pass
+            n_unpending = request.POST['num_unpending']
+            s_unpending = request.POST['seat_unpending']
+            print('unpending :'+s_unpending)
+            unpend_seat = s_unpending.split(',')
+            for j in unpend_seat:
+                Pending.objects.filter(seat__icontains = j).delete()
+
 
         error=True
     # d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend}
@@ -103,37 +116,39 @@ def Book_Ticket(request,pid):
         movies = {}
         movies["name"] = Movie.objects.filter(screen=1)
         print(movies)
-           
-        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
+        print(Screen1.objects.get().gold)
+        gold_price = Screen1.objects.get().gold
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time, 'pid': pid, 'gold_price': gold_price}
          
         return render(request,'book_ticket1.html',d)
     elif pid == 2:
         movies = {}
         movies["name"] = Movie.objects.filter(screen=2)
         print(movies)
-           
-        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
+        gold_price = Screen2.objects.get().gold
+        platinum_price = Screen2.objects.get().platinum
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time, 'pid': pid, 'gold_price': gold_price, 'platinum_price': platinum_price}
         return render(request, 'book_ticket2.html', d)
     elif pid == 3:
         movies = {}
         movies["name"] = Movie.objects.filter(screen=3)
         print(movies)
            
-        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time, 'pid': pid}
         return render(request, 'book_ticket3.html', d)
     elif pid == 4:
         movies = {}
         movies["name"] = Movie.objects.filter(screen=4)
         print(movies)
            
-        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time, 'pid': pid}
         return render(request, 'book_ticket4.html', d)
     elif pid == 5:
         movies = {}
         movies["name"] = Movie.objects.filter(screen=5)
         print(movies)
            
-        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time}
+        d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend,'movies':movies, 'movie_time':movie_time, 'pid': pid}
         return render(request, 'book_ticket5.html', d)
 
 def View_Booking(request):
