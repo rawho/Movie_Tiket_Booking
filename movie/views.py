@@ -80,6 +80,7 @@ def Book_Ticket(request,pid):
     
     book=""
     pend=""
+    p=0
     movie_time = Movie_Time.objects.all()
     if request.method=="POST":
         try:
@@ -153,6 +154,7 @@ def Book_Ticket(request,pid):
             'data':data,
             'error':error,
             'li':li,'li2':li2,
+            'price': p,
             'book':book, 
             'pend' : pend,
             'movies':movies,
@@ -192,6 +194,7 @@ def Book_Ticket(request,pid):
             'data':data,
             'error':error,
             'li':li,'li2':li2,
+            'price': p,
             'book':book, 
             'pend' : pend,
             'movies':movies,
@@ -230,6 +233,7 @@ def Book_Ticket(request,pid):
             'data':data,
             'error':error,
             'li':li,'li2':li2,
+            'price': p,
             'book':book, 
             'pend' : pend,
             'movies':movies,
@@ -262,6 +266,7 @@ def Book_Ticket(request,pid):
             'data':data,
             'error':error,
             'li':li,'li2':li2,
+            'price': p,
             'book':book, 
             'pend' : pend,
             'movies':movies,
@@ -298,6 +303,7 @@ def Book_Ticket(request,pid):
             'data':data,
             'error':error,
             'li':li,'li2':li2,
+            'price': p,
             'book':book, 
             'pend' : pend,
             'movies':movies,

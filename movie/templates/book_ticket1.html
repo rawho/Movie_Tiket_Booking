@@ -7,7 +7,7 @@
     <!-- Meta-Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    
+
     <script>
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
@@ -22,12 +22,14 @@
     <link rel="stylesheet" href="{% static 'css2/style.css' %}" type="text/css" media="all">
     <!-- //Custom-Stylesheet-Links -->
     <!--fonts -->
-    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i"
+        rel="stylesheet">
     <!-- //fonts -->
 </head>
 
 <body onload="onLoaderFunc()">
-    <div style="width: 50%; margin: auto; display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 50px;" class="row">
+    <div style="width: 50%; margin: auto; display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 50px;"
+        class="row">
         {% for i in screens %}
         <div class="col-md-2">
             <a href={% url 'book_ticket' i %}>
@@ -41,8 +43,8 @@
 
         <!-- seat layout -->
         <div class="seatStructure txt-center" style="overflow-x:auto;">
-             <!-- seat availabilty list -->
-             <ul class="seat_w3ls">
+            <!-- seat availabilty list -->
+            <ul class="seat_w3ls">
                 <li class="smallBox greenBox">Selected Seat</li>
 
                 <li class="smallBox redBox">Reserved Seat</li>
@@ -61,12 +63,12 @@
                     <td></td>
                     {% for i in row %}
                     <td>{{i}}</td>
-                     {% ifequal i 5 %}
-                      <td></td>
-                     {% endifequal %} 
+                    {% ifequal i 5 %}
+                    <td></td>
+                    {% endifequal %}
                     {% endfor %}
                 </tr>
-            
+
                 {% for j,v in seats.items %}
                 <tr>
                     <td>{{j}}</td>
@@ -80,23 +82,23 @@
                         <input type="checkbox" class="seats" value={{i}}>
                         {% endif %}
                     </td>
-                        {% ifequal i v.4 %}
-                         <td></td>
-                        {% endifequal %}
+                    {% ifequal i v.4 %}
+                    <td></td>
+                    {% endifequal %}
                     {% endfor %}
-                    
+
                 </tr>
-                   {% ifequal j "E" %}
-                         <tr>
-                            <td></td>
-                        </tr>
-                        {% endifequal %}
+                {% ifequal j "E" %}
+                <tr>
+                    <td></td>
+                </tr>
+                {% endifequal %}
                 {% endfor %}
-                
+
 
             </table>
 
-           
+
             <button onclick="updateTextArea()">Confirm Selection</button>
             <button onclick="updatePending()">Confirm Pending</button>
             <span class="removePending" style="background: #f5f5f5;
@@ -117,27 +119,27 @@
 
             <!-- input fields -->
             <div style="margin-bottom: 50px;" class="inputForm">
-        
+
 
                 <div style="margin-right: 20px;" class="form-group">
                     <label for="exampleFormControlSelect1">Select Movie</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="time" required>
-                            {% for i in movies.values %}
-                            {% for j in i %}
-                            <option value="{{j}}">{{ j }}</option>
-                            {% endfor %}
-                            {% endfor %}
-                        </select>
-                  </div>
+                    <select class="form-control" id="exampleFormControlSelect1" name="time" required>
+                        {% for i in movies.values %}
+                        {% for j in i %}
+                        <option value="{{j}}">{{ j }}</option>
+                        {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
 
                 <div style="margin-right: 20px;" class="form-group">
                     <label for="exampleFormControlSelect1">Select Time</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="time" required>
-                            {% for i in movie_time %}
-                            <option value="{{i.time1}}">{{i.time1}}</option>
-                            {% endfor %}
-                        </select>
-                  </div>
+                    <select class="form-control" id="exampleFormControlSelect1" name="time" required>
+                        {% for i in movie_time %}
+                        <option value="{{i.time1}}">{{i.time1}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
 
                 <!-- <h2>fill the required details below and select your seats</h2> -->
@@ -153,54 +155,54 @@
                 <!-- <button onclick="makeSeatsPending()">Make Seats Pending</button> -->
             </div>
             <!-- //input fields -->
-           
-            
+
+
             <!-- details after booking displayed here -->
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-            <div class="" style="overflow-x:auto;">
-               
-                <table class="Displaytable w3ls-table" style="width:100%">
-                    <tr>
-                      
-                        <th>Number of Seats</th>
-                        <th>Seats</th>
-                        
-                    </tr>
-                    <tr>
-                        
-                        <td>
-                            <textarea id="NumberDisplay" name="num" readonly></textarea>
-                        </td>
-                        <td>
-                            <textarea id="seatsDisplay" name="seat" readonly></textarea>
-                        </td>
-                    </tr>
+                <div class="" style="overflow-x:auto;">
 
-                    <tr>
-                        
-                        <td>
-                            <textarea id="NumberDisplay_pending" name="num_pending" readonly></textarea>
-                        </td>
-                        <td>
-                            <textarea id="seatsDisplay_pending" name="seat_pending" readonly></textarea>
-                        </td>
-                    </tr>
+                    <table class="Displaytable w3ls-table" style="width:100%">
+                        <tr>
 
-                    <tr>
-                        
-                        <td>
-                            <textarea id="NumberDisplay_unpending" name="num_unpending" readonly></textarea>
-                        </td>
-                        <td>
-                            <textarea id="seatsDisplay_unpending" name="seat_unpending" readonly></textarea>
-                        </td>
-                    </tr>
-                </table>
+                            <th>Number of Seats</th>
+                            <th>Seats</th>
 
-            </div>
-            <button type="submit" style="margin-top:2%;float:center">Book Now</button>
-</form>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <textarea id="NumberDisplay" name="num" readonly></textarea>
+                            </td>
+                            <td>
+                                <textarea id="seatsDisplay" name="seat" readonly></textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                <textarea id="NumberDisplay_pending" name="num_pending" readonly></textarea>
+                            </td>
+                            <td>
+                                <textarea id="seatsDisplay_pending" name="seat_pending" readonly></textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                <textarea id="NumberDisplay_unpending" name="num_unpending" readonly></textarea>
+                            </td>
+                            <td>
+                                <textarea id="seatsDisplay_unpending" name="seat_unpending" readonly></textarea>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <button type="submit" style="margin-top:2%;float:center">Book Now</button>
+            </form>
             <!-- //details after booking displayed here -->
         </div>
     </div>
@@ -208,10 +210,156 @@
     </div>
 
 
+
     <!-- js -->
     <script src="{% static 'js2/jquery-2.2.3.min.js' %}"></script>
     <!-- //js -->
     <!-- script for seat selection -->
+
+
+    {% if price != 0 %}
+    <script>
+        var divContents = `
+        <!--
+Inspired by: https://dribbble.com/shots/1166639-Movie-Ticket/attachments/152161
+-->
+<style>
+body {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-weight: 600;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ticket {
+  width: 400px;
+  height: 550px;
+  border: 1px solid #000;
+  background-color: white;
+  margin: 25px auto;
+  position: relative;
+}
+
+
+
+
+.title {
+  padding: 50px 25px 10px;
+}
+
+.cinema {
+  color: #aaa;
+  font-size: 22px;
+}
+
+.movie-title {
+  font-size: 25px;
+  text-align: center;
+}
+
+.info {
+  padding: 15px 25px;
+}
+
+table {
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+table tr {
+  margin-bottom: 10px;
+}
+table th {
+  text-align: left;
+}
+table th:nth-of-type(1) {
+  width: 38%;
+}
+table th:nth-of-type(2) {
+  width: 40%;
+}
+table th:nth-of-type(3) {
+  width: 15%;
+}
+table td {
+  width: 33%;
+  font-size: 32px;
+}
+
+.bigger {
+  font-size: 48px;
+}
+
+.serial {
+  padding: 25px;
+}
+.serial table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+.serial td {
+  width: 3px;
+  height: 50px;
+}
+
+.numbers td {
+  font-size: 16px;
+  text-align: center;
+}
+</style>
+<div class="ticket">
+	<div class="holes-top"></div>
+	<div class="title">
+		<p class="cinema">ODEON CINEMA PRESENTS</p>
+		<p class="movie-title">ONLY GOD FORGIVES</p>
+	</div>
+	
+	<div class="info">
+	<table>
+		<tr>
+			<th>SCREEN</th>
+			<th>ROW</th>
+			<th>SEAT</th>
+		</tr>
+		<tr>
+			<td class="bigger">{{pid}}</td>
+			<td class="bigger">H</td>
+			<td class="bigger">24</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<th>PRICE</th>
+			<th>DATE</th>
+			<th>TIME</th>
+		</tr>
+		<tr>
+			<td>{{price}}Rs</td>
+			<td>1/13/17</td>
+			<td>19:30</td>
+		</tr>
+	</table>
+	</div>
+
+</div>
+
+        `;
+        var a = window.open('', '', 'height=700, width=700');
+            a.document.write('<html>');
+            a.document.write('<body >');
+            a.document.write(divContents);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+        setInterval(() => {
+            window.location = '/book_ticket1'
+        }, 2000);
+    </script>
+    {% endif %}
+
     <script>
         function onLoaderFunc() {
             $(".seatStructure *").prop("disabled", true);
@@ -245,7 +393,7 @@
             if ($("input:checked").length == ($("#Numseats").val())) {
                 $(".seatStructure *").prop("disabled", true);
 
-            
+
                 var allNumberVals = [];
                 var allSeatsVals = [];
 
@@ -253,14 +401,14 @@
                 var allSeatsVals_pending = [];
 
                 //Storing in Array
-                
+
                 allNumberVals.push($("#Numseats").val());
                 $('#seatsBlock :checked').each(function () {
                     allSeatsVals.push($(this).val());
                 });
 
                 //Displaying 
-               
+
                 $('#NumberDisplay').val(allNumberVals);
                 $('#seatsDisplay').val(allSeatsVals);
 
@@ -272,7 +420,7 @@
         }
 
         function updatePending() {
-            
+
             // var element = document.getElementById("firstseat");
             // console.log(element);
             // element.classList.remove("redBox");
@@ -281,26 +429,26 @@
             if ($("input:checked").length == ($("#Numseats").val())) {
                 $(".seatStructure *").prop("disabled", true);
 
-            
+
                 var allNumberVals_pending = [];
                 var allSeatsVals_pending = [];
 
                 //Storing in Array
-                
+
                 allNumberVals_pending.push($("#Numseats").val());
                 $('#seatsBlock :checked').each(function () {
                     allSeatsVals_pending.push($(this).val());
                 });
 
                 //Displaying 
-               
+
                 $('#NumberDisplay_pending').val(allNumberVals_pending);
                 $('#seatsDisplay_pending').val(allSeatsVals_pending);
-    
+
             } else {
                 alert("Please select " + ($("#Numseats").val()) + " seats")
             }
-            
+
         }
 
         function myFunction() {
@@ -335,30 +483,31 @@
         });
 
         $('.removePending').click(function () {
-            var i=0;
+            var i = 0;
             var unclickedSeats = [];
             $(".greyBox").click(function () {
                 unclickedSeats.push($(this).attr('value'));
                 i++;
-            var input = $('<input />', {
-            'type': 'checkbox',
-                'class': 'seats' });
-        $(this).parent().append(input);
-        $(this).remove();
-        input.focus();
-        $(':checkbox').prop('disabled', true);
+                var input = $('<input />', {
+                    'type': 'checkbox',
+                    'class': 'seats'
+                });
+                $(this).parent().append(input);
+                $(this).remove();
+                input.focus();
+                $(':checkbox').prop('disabled', true);
 
-        $('#NumberDisplay_unpending').val(i);
+                $('#NumberDisplay_unpending').val(i);
                 $('#seatsDisplay_unpending').val(unclickedSeats);
             }
-        );
+            );
         })
     </script>
-    {% if error %}
-<script>
+    <!-- {% if error %}
+    <script>
     window.location = `/book_ticket1`
 </script>
-{% endif %}
+    {% endif %} -->
 </body>
 
 </html>
