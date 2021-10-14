@@ -65,7 +65,9 @@ def Book_Ticket(request,pid):
     data = Set_Timing.objects.get(id=pid)
     data1 = Booking.objects.filter(set_time=data)
     data2 = Pending.objects.filter(set_time=data)
-
+    _P=['P1','P2','P3','P4','P5','P6','P7','P8','P9','P10','P11','P12','P13','P14','P15','P16','P17','P18','P19','P20','P21','P22','P23','P24','P25','P26']
+    _Q=['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10','Q11','Q12','Q13','Q14','Q15','Q16','Q17','Q18','Q19','Q20','Q21','Q22','Q23','Q24','Q25','Q26']
+    _R=['R1','R2','R3','R4','R5','R6','R7','R8','R9','R10','R11','R12','R13','R14','R15','R16','R17','R18','R19','R20','R21','R22','R23','R24','R25','R26','R27','R28','R29']
     li = []
     for i in data1:
         li.append(i.seat)
@@ -81,23 +83,23 @@ def Book_Ticket(request,pid):
     movie_time = Movie_Time.objects.all()
     if request.method=="POST":
         try:
+            p=int()
             n = request.POST['num']
             s = request.POST['seat']
 
-            book_s = s.split(',')
-            print(book_s)
-            print('||||||||||||||||||||||||')
-            if pid == 2:
-                p = int(n)*150
-                print(p)
+            _s=s.split(",")
+            if pid == 2 or pid == 3 :
+                for i in _s:
+                        if i in _P or i in _Q or i in _R:
+                            p=p+150
+                        else:
+                            p=p+120
+                print(p)   
             else:
                 p = int(n)*120
                 print(p)
-            for i in book_s:
-                print(i)
-                print('book')
-                book = Booking.objects.create(set_time=data,ticket=n,price=p,seat=s)
-                print(book)
+            for i in _s:
+                book = Booking.objects.create(set_time=data,ticket=1,price=p,seat=i)
         except:
             pass
         try:
