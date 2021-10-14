@@ -69,7 +69,7 @@ def Book_Ticket(request,pid):
     li = []
     for i in data1:
         li.append(i.seat)
-    
+    print(li)
     li2 = []
     for i in data2:
         li2.append(i.seat)
@@ -83,13 +83,21 @@ def Book_Ticket(request,pid):
         try:
             n = request.POST['num']
             s = request.POST['seat']
+
+            book_s = s.split(',')
+            print(book_s)
+            print('||||||||||||||||||||||||')
             if pid == 2:
                 p = int(n)*150
                 print(p)
             else:
                 p = int(n)*120
                 print(p)
-            book = Booking.objects.create(set_time=data,ticket=n,price=p,seat=s)
+            for i in book_s:
+                print(i)
+                print('book')
+                book = Booking.objects.create(set_time=data,ticket=n,price=p,seat=s)
+                print(book)
         except:
             pass
         try:
@@ -106,8 +114,18 @@ def Book_Ticket(request,pid):
                 pend = Pending.objects.create(set_time=data,ticket=n_pending,price=p_pending,seat=i)
                 print(pend)
         except:
-            pass
-   
+            if request.POST['num_unpending']:
+                n_unpending = request.POST['num_unpending']
+                s_unpending = request.POST['seat_unpending']
+
+
+                print(n_unpending, s_unpending)
+                print('unpending: ' + s_unpending)
+                unpend_seat = s_unpending.split(',')
+                for j in unpend_seat:
+                    Pending.objects.filter(seat__icontains = j).delete()
+
+
         error=True
     # d = {'data':data,'error':error,'li':li,'li2':li2,'book':book, 'pend' : pend}
     
