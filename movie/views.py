@@ -346,3 +346,11 @@ def delete_booking(request,pid):
     return redirect('view_booking')
 
 
+def sample(request):
+    if request.method == 'POST':
+        print(request.POST['pid'])
+        print(request.POST['time'])
+    else:
+        print("submit not working")
+    context={}
+    return render(request,'book_ticket.html',context)
