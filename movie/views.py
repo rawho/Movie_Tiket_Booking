@@ -2,7 +2,11 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from .models import *
+import dateutil.parser as dp
 # Create your views here.
+timings=[
+    '2021-01-01 09:00:00.999Z','2021-01-01 12:00:00.999Z','2021-01-01 15:00:00.999Z','2021-01-01 18:00:00.999Z','2021-01-01 21:00:00.999Z'
+]
 def Home(request):
     data = Movie.objects.all()
     d = {'data':data}
@@ -63,19 +67,17 @@ def Movie_detail(request,pid):
 
 def Book_Ticket(request,pid):
     data = Set_Timing.objects.get(id=pid)
-    data1 = Booking.objects.filter(set_time=data)
-    data2 = Pending.objects.filter(set_time=data)
+    data1 = Booking.objects.filter(time=timings[1])
+    data2 = Pending.objects.filter(time=timings[1])
     _P=['P1','P2','P3','P4','P5','P6','P7','P8','P9','P10','P11','P12','P13','P14','P15','P16','P17','P18','P19','P20','P21','P22','P23','P24','P25','P26']
     _Q=['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8','Q9','Q10','Q11','Q12','Q13','Q14','Q15','Q16','Q17','Q18','Q19','Q20','Q21','Q22','Q23','Q24','Q25','Q26']
     _R=['R1','R2','R3','R4','R5','R6','R7','R8','R9','R10','R11','R12','R13','R14','R15','R16','R17','R18','R19','R20','R21','R22','R23','R24','R25','R26','R27','R28','R29']
     li = []
     for i in data1:
         li.append(i.seat)
-    print(li)
     li2 = []
     for i in data2:
         li2.append(i.seat)
-    print(li2)
     error = False
     
     book=""
@@ -83,8 +85,16 @@ def Book_Ticket(request,pid):
     p=0
     movie_time = Movie_Time.objects.all()
     if request.method=="POST":
+        
         try:
             p=int()
+            time=request.POST['time']
+            if time[-2:]=='PM' and time[:2]!='12':
+               time=str(int(time[:2])+12)          
+            else:
+                time=time[:2]
+            date_time= dp.parse(str('2021-01-01T'+time+':00:00.999Z' ))
+            print(date_time)
             n = request.POST['num']
             s = request.POST['seat']
 
@@ -100,7 +110,7 @@ def Book_Ticket(request,pid):
                 p = int(n)*120
                 print(p)
             for i in _s:
-                book = Booking.objects.create(set_time=data,ticket=1,price=p,seat=i)
+                book = Booking.objects.create(set_time=data,time=date_time,ticket=1,price=p,seat=i)
         except:
             pass
         try:
@@ -135,7 +145,6 @@ def Book_Ticket(request,pid):
     if pid == 1:
         movies = {}
         movies["name"] = Movie.objects.filter(screen=1)
-        print(movies)
         screens=[1,2,3,4,5]
         A=['A1','A2','A3','A4','A5']
         B=['B1','B2','B3','B4','B5','B6']
@@ -168,7 +177,6 @@ def Book_Ticket(request,pid):
     elif pid == 2:
         movies = {}
         movies["name"] = Movie.objects.filter(screen=2)
-        print(movies)
         screens=[1,2,3,4,5]
         A=['A1','A2','A3','A4','A5','A6']
         B=['B1','B2','B3','B4','B5','B6','B7']
@@ -207,7 +215,6 @@ def Book_Ticket(request,pid):
     elif pid == 3:
         movies = {}
         movies["name"] = Movie.objects.filter(screen=3)
-        print(movies)
         screens=[1,2,3,4,5]
         A=['A1','A2','A3','A4','A5','A6','A7','A8','A9']
         B=['B1','B2','B3','B4','B5','B6','B7','B8','B9','B10']
@@ -246,7 +253,6 @@ def Book_Ticket(request,pid):
     elif pid == 4:
         movies = {}
         movies["name"] = Movie.objects.filter(screen=4)
-        print(movies)
         screens=[1,2,3,4,5]
         A=['A1','A2','A3','A4','A5']
         B=['B1','B2','B3','B4','B5','B6']
@@ -279,7 +285,6 @@ def Book_Ticket(request,pid):
     elif pid == 5:
         movies = {}
         movies["name"] = Movie.objects.filter(screen=5)
-        print(movies)
         screens=[1,2,3,4,5]
         A=['A1','A2','A3','A4','A5','A6','A7']
         B=['B1','B2','B3','B4','B5','B6','B7','B8']
@@ -341,3 +346,11 @@ def delete_booking(request,pid):
     return redirect('view_booking')
 
 
+def sample(request):
+    if request.method == 'POST':
+        print(request.POST['pid'])
+        print(request.POST['time'])
+    else:
+        print("submit not working")
+    context={}
+    return render(request,'book_ticket.html',context)

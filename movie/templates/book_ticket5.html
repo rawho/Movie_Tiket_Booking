@@ -148,14 +148,7 @@
                         </select>
                   </div>
 
-                <div style="margin-right: 20px;" class="form-group">
-                    <label for="exampleFormControlSelect1">Select Time</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="time" required>
-                            {% for i in movie_time %}
-                            <option value="{{i.time1}}">{{i.time1}}</option>
-                            {% endfor %}
-                        </select>
-                  </div>
+                
 
 
                 <!-- <h2>fill the required details below and select your seats</h2> -->
@@ -177,7 +170,14 @@
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
             <div class="" style="overflow-x:auto;">
-               
+                <div style="margin-right: 20px;" class="form-group">
+                    <label for="exampleFormControlSelect1">Select Time</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="time" required>
+                            {% for i in movie_time %}
+                            <option value="{{i.time1}}">{{i.time1}}</option>
+                            {% endfor %}
+                        </select>
+                  </div>
                 <table class="Displaytable w3ls-table" style="width:100%">
                     <tr>
                       
